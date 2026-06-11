@@ -1,4 +1,4 @@
-# 🕰️ ChronoCare - Akıllı Saat Koleksiyon ve Servis Yönetim Sistemi
+# ChronoCare - Akıllı Saat Koleksiyon ve Servis Yönetim Sistemi
 
 [![Flutter Version](https://img.shields.io/badge/Flutter-%E2%89%A53.0.0-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart Version](https://img.shields.io/badge/Dart-%E2%89%A53.0.0-0175C2?logo=dart&logoColor=white)](https://dart.dev)
@@ -33,7 +33,7 @@ lib/
     └── screens/           # Uygulama ekranları (Dashboard, AddWatch, ServiceDetail, Login, vb.)
 ```
 
-### 📂 Katman Sorumlulukları
+### Katman Sorumlulukları
 *   **Data Layer (Veri Katmanı):** Çevrimdışı öncelikli (offline-first) mimari gereği SQLite üzerinden yerel veri saklama işlemlerini yönetir. İlişkisel tablolar arasında `ON DELETE CASCADE` kısıtlamaları kullanılarak veri bütünlüğü (referential integrity) korunur. Ham veri setlerini Dart nesnelerine (ve tersine) dönüştürür.
 *   **Business Layer (İş Mantığı Katmanı):** Uygulamanın beynidir. Kural tabanlı yapay zeka analiz algoritmalarını ve merkezi durum yönetimini (State Management) barındırır. `AppRepository` katmanı veri tabanının karmaşık sorgularını UI katmanından tamamen gizler.
 *   **Presentation Layer (Sunum Katmanı):** Kullanıcının etkileşime girdiği lüks ve akıcı (premium) arayüzdür. İş mantığı barındırmaz; yalnızca `Provider` üzerinden durum değişikliklerini dinleyerek arayüzü reaktif olarak günceller.
