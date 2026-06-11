@@ -12,7 +12,7 @@ Bu proje, **İstanbul Topkapı Üniversitesi Bilgisayar Mühendisliği Mobil Uyg
 
 ---
 
-## 🏗️ Katmanlı Mimari ve Klasör Yapısı (Layered Architecture)
+## Katmanlı Mimari ve Klasör Yapısı (Layered Architecture)
 
 Proje; bağımlılıkları minimuma indirmek, test edilebilirliği en üst düzeye çıkarmak ve sürdürülebilirliği artırmak adına kesin sınırlarla ayrılmış **3 Katmanlı Mimari (Presentation, Business, Data)** prensiplerine göre yapılandırılmıştır.
 
@@ -40,18 +40,18 @@ lib/
 
 ---
 
-## ✨ Öne Çıkan Özellikler
+## Öne Çıkan Özellikler
 
-*   🔒 **Güvenli Giriş & Kayıt Sistemi:** Kullanıcılar yerel SQLite veritabanında saklanan kimlik bilgileriyle güvenli bir şekilde hesap oluşturabilir, giriş yapabilir ve oturumlarını kalıcı hale getirebilirler.
-*   ⌚ **Dinamik Koleksiyon Takibi:** Seiko 4R35, Miyota 9039, Sellita SW200 veya ETA 2824 gibi farklı kalibrelere, markalara, kasa tiplerine ve satın alım detaylarına sahip saatler ayrıntılı bir şekilde envantere kaydedilebilir.
-*   🤖 **AI Destekli Arıza Teşhis Motoru (Uzman Sistem):** Kullanıcı şikayetlerini ve `ImagePicker` aracılığıyla yüklenen saat fotoğraflarını analiz eden kural tabanlı uzman sistem (Regex & Karar Ağacı tabanlı); mekanik kök neden analizi, tahmini onarım süresi, yapay zeka güven skoru (%) ve kullanıcıya yönelik acil eylem planı üretir.
-*   🛠️ **Tam Kapsamlı Servis Geçmişi:** Saatlere ait oluşturulan arıza ve bakım biletleri (ticket) listelenebilir, anında güncellenebilir (Update) ve silinebilir (Delete).
-*   📊 **Analitik Kontrol Paneli (Dashboard):** Özel tasarlanmış göstergeler sayesinde koleksiyondaki toplam saat sayısı, servis sürecindeki aktif saatler ve yaklaşan bakım zamanları anlık olarak analiz edilir.
-*   🌙 **Premium Amber/Antrasit Tema:** Geleneksel lüks saat markalarının prestijli vizyonundan ilham alınarak tasarlanan, koyu antrasit tonları ve amber (kehribar) detaylarına sahip göz yormayan premium tema yapısı.
+*   **Güvenli Giriş & Kayıt Sistemi:** Kullanıcılar yerel SQLite veritabanında saklanan kimlik bilgileriyle güvenli bir şekilde hesap oluşturabilir, giriş yapabilir ve oturumlarını kalıcı hale getirebilirler.
+*   **Dinamik Koleksiyon Takibi:** Seiko 4R35, Miyota 9039, Sellita SW200 veya ETA 2824 gibi farklı kalibrelere, markalara, kasa tiplerine ve satın alım detaylarına sahip saatler ayrıntılı bir şekilde envantere kaydedilebilir.
+*   **AI Destekli Arıza Teşhis Motoru (Uzman Sistem):** Kullanıcı şikayetlerini ve `ImagePicker` aracılığıyla yüklenen saat fotoğraflarını analiz eden kural tabanlı uzman sistem (Regex & Karar Ağacı tabanlı); mekanik kök neden analizi, tahmini onarım süresi, yapay zeka güven skoru (%) ve kullanıcıya yönelik acil eylem planı üretir.
+*   **Tam Kapsamlı Servis Geçmişi:** Saatlere ait oluşturulan arıza ve bakım biletleri (ticket) listelenebilir, anında güncellenebilir (Update) ve silinebilir (Delete).
+*   **Analitik Kontrol Paneli (Dashboard):** Özel tasarlanmış göstergeler sayesinde koleksiyondaki toplam saat sayısı, servis sürecindeki aktif saatler ve yaklaşan bakım zamanları anlık olarak analiz edilir.
+*   **Premium Amber/Antrasit Tema:** Geleneksel lüks saat markalarının prestijli vizyonundan ilham alınarak tasarlanan, koyu antrasit tonları ve amber (kehribar) detaylarına sahip göz yormayan premium tema yapısı.
 
 ---
 
-## 🛠️ Kullanılan Teknolojiler ve Bağımlılıklar
+## Kullanılan Teknolojiler ve Bağımlılıklar
 
 *   **Flutter & Dart** - Mobil uygulama çatısı ve programlama dili.
 *   **SQLite (sqflite)** - İlişkisel yerel veritabanı yönetimi (Foreign Key & Cascade desteği ile).
@@ -61,7 +61,7 @@ lib/
 
 ---
 
-## 🚀 Kurulum ve Çalıştırma
+## Kurulum ve Çalıştırma
 
 Projeyi yerel bilgisayarınızda kurmak ve çalıştırmak için aşağıdaki adımları takip edin:
 
@@ -90,7 +90,7 @@ Projeyi yerel bilgisayarınızda kurmak ve çalıştırmak için aşağıdaki ad
 
 ---
 
-## 🔑 Varsayılan Giriş Bilgileri
+## Varsayılan Giriş Bilgileri
 
 Uygulamayı ilk açtığınızda hızlıca test edebilmek için aşağıdaki önceden tanımlanmış test hesabını kullanabilir veya giriş ekranındaki kayıt ol seçeneğiyle kendi koleksiyoner profilinizi sıfırdan oluşturabilirsiniz:
 
@@ -99,7 +99,7 @@ Uygulamayı ilk açtığınızda hızlıca test edebilmek için aşağıdaki ön
 
 ---
 
-## 📝 Lisans ve İletişim
+## Lisans ve İletişim
 
 Bu proje, eğitim amaçlı ve yazılım mimarisi en iyi pratiklerini (best practices) göstermek amacıyla geliştirilmiştir. 
 Herhangi bir soru veya geri bildirim için GitHub üzerinden bir Issue açabilir ya da iletişime geçebilirsiniz.
