@@ -6,7 +6,6 @@ Uygulama, mekanik saat koleksiyonerlerinin envanterlerini yönetmesini, saat mek
 🏗️ Katmanlı Mimari ve Klasör Yapısı (Layered Architecture)
 Proje, bağımlılıkları minimuma indirmek, test edilebilirliği sağlamak ve sürdürülebilirliği artırmak adına kesin sınırlarla ayrılmış 3 Katmanlı Mimari (Presentation, Business, Data) yapısı üzerine kurulmuştur.
 
-Plaintext
 lib/
 ├── data/                  # 1. VERİ KATMANI (DATA LAYER)
 │   ├── database_helper/   # SQLite veritabanı kurulumu ve tablo inşası
