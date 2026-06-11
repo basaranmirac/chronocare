@@ -1,84 +1,106 @@
-🕰️ ChronoCare (Akıllı Saat Koleksiyon ve Servis Yönetim Sistemi)
-Bu proje, İstanbul Topkapı Üniversitesi Bilgisayar Mühendisliği Mobil Uygulama Tasarımı ve Geliştirme dersi final projesi gereksinimlerine ve katı yazılım mühendisliği kurallarına uygun olarak geliştirilmiş, üretim kalitesinde (production-ready) bir Flutter mobil uygulamasıdır.
+# 🕰️ ChronoCare - Akıllı Saat Koleksiyon ve Servis Yönetim Sistemi
 
-Uygulama, mekanik saat koleksiyonerlerinin envanterlerini yönetmesini, saat mekanizmalarının periyodik bakımlarını takip edebilmesini ve yapay zeka destekli otonom bir uzman sistem aracılığıyla olası mekanik arızaları (izokronizm hataları, sıvı teması vb.) teşhis edebilmesini amaçlamaktadır.
+[![Flutter Version](https://img.shields.io/badge/Flutter-%E2%89%A53.0.0-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart Version](https://img.shields.io/badge/Dart-%E2%89%A53.0.0-0175C2?logo=dart&logoColor=white)](https://dart.dev)
+[![Database](https://img.shields.io/badge/SQLite-sqflite-003B57?logo=sqlite&logoColor=white)](https://pub.dev/packages/sqflite)
+[![State Management](https://img.shields.io/badge/State-Provider-01579B?logo=dart&logoColor=white)](https://pub.dev/packages/provider)
+[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-green.svg)](#)
 
-🏗️ Katmanlı Mimari ve Klasör Yapısı (Layered Architecture)
-Proje, bağımlılıkları minimuma indirmek, test edilebilirliği sağlamak ve sürdürülebilirliği artırmak adına kesin sınırlarla ayrılmış 3 Katmanlı Mimari (Presentation, Business, Data) yapısı üzerine kurulmuştur.
+ChronoCare, mekanik saat koleksiyonerlerinin envanterlerini uçtan uca yönetmesi, saat mekanizmalarının periyodik bakımlarını takip edebilmesi ve yapay zeka destekli otonom bir uzman sistem aracılığıyla olası mekanik arızaları teşhis edebilmesi amacıyla geliştirilmiş **üretim kalitesinde (production-ready)** bir Flutter mobil uygulamasıdır.
 
+Bu proje, **İstanbul Topkapı Üniversitesi Bilgisayar Mühendisliği Mobil Uygulama Tasarımı ve Geliştirme** dersi final projesi gereksinimlerine ve katı yazılım mühendisliği kurallarına uygun olarak tasarlanmıştır.
+
+---
+
+## 🏗️ Katmanlı Mimari ve Klasör Yapısı (Layered Architecture)
+
+Proje; bağımlılıkları minimuma indirmek, test edilebilirliği en üst düzeye çıkarmak ve sürdürülebilirliği artırmak adına kesin sınırlarla ayrılmış **3 Katmanlı Mimari (Presentation, Business, Data)** prensiplerine göre yapılandırılmıştır.
+
+```text
 lib/
 ├── data/                  # 1. VERİ KATMANI (DATA LAYER)
-│   ├── database_helper/   # SQLite veritabanı kurulumu ve tablo inşası
-│   ├── models/            # Immutable veri modelleri (Watch, ServiceTicket, User)
-│   └── dao/               # Veritabanı doğrudan erişim sınıfları (WatchDao, ServiceDao)
+│   ├── database_helper/   # SQLite veritabanı kurulumu, tablo şemaları ve versiyon yönetimi
+│   ├── models/            # Immutable (değiştirilemez) veri modelleri (Watch, ServiceTicket, User)
+│   └── dao/               # Veritabanı doğrudan erişim sınıfları (WatchDao, ServiceDao, UserDao)
 │
 ├── business/              # 2. İŞ MANTIĞI KATMANI (BUSINESS/DOMAIN LAYER)
 │   ├── ai_advisor/        # Kural Tabanlı AI Arıza Teşhis Motoru (Uzman Sistem)
-│   ├── state/             # State Yönetimi (AppProvider)
-│   └── repositories/      # Veri kaynaklarını UI'dan soyutlayan köprü (AppRepository)
+│   ├── state/             # Global durum yönetimi (AppProvider)
+│   └── repositories/      # Veri kaynaklarını UI'dan soyutlayan köprü sınıfı (AppRepository)
 │
 └── ui/                    # 3. SUNUM KATMANI (PRESENTATION LAYER)
-    ├── widgets/           # Tekrar kullanılabilir arayüz elemanları (WatchCard, StatPanel)
-    └── screens/           # Uygulama ekranları (Dashboard, AddWatch, ServiceDetail, Login)
-Katman Sorumlulukları:
-Data Layer (Veri Katmanı): Çevrimdışı (offline-first) kullanım için SQLite üzerinden tabloları yönetir. ON DELETE CASCADE kısıtlamalarıyla veri bütünlüğünü sağlar ve model nesnelerini (Map dönüşümleriyle) işler.
+    ├── widgets/           # Tekrar kullanılabilir modüler bileşenler (WatchCard, StatPanel, vb.)
+    └── screens/           # Uygulama ekranları (Dashboard, AddWatch, ServiceDetail, Login, vb.)
+```
 
-Business Layer (İş Mantığı Katmanı): Yapay zeka analiz algoritmalarını ve merkezi durum yönetimini (State Management) barındırır. AppRepository aracılığıyla veritabanı karmaşıklığını gizler.
+### 📂 Katman Sorumlulukları
+*   **Data Layer (Veri Katmanı):** Çevrimdışı öncelikli (offline-first) mimari gereği SQLite üzerinden yerel veri saklama işlemlerini yönetir. İlişkisel tablolar arasında `ON DELETE CASCADE` kısıtlamaları kullanılarak veri bütünlüğü (referential integrity) korunur. Ham veri setlerini Dart nesnelerine (ve tersine) dönüştürür.
+*   **Business Layer (İş Mantığı Katmanı):** Uygulamanın beynidir. Kural tabanlı yapay zeka analiz algoritmalarını ve merkezi durum yönetimini (State Management) barındırır. `AppRepository` katmanı veri tabanının karmaşık sorgularını UI katmanından tamamen gizler.
+*   **Presentation Layer (Sunum Katmanı):** Kullanıcının etkileşime girdiği lüks ve akıcı (premium) arayüzdür. İş mantığı barındırmaz; yalnızca `Provider` üzerinden durum değişikliklerini dinleyerek arayüzü reaktif olarak günceller.
 
-Presentation Layer (Sunum Katmanı): Kullanıcının etkileşime girdiği lüks (premium) arayüzdür. İş mantığı barındırmaz, Provider üzerinden durum değişikliklerini dinleyerek anlık güncellenir.
+---
 
-✨ Öne Çıkan Özellikler
-🔒 Modern Giriş & Kayıt Sistemi: Kullanıcılar hesap oluşturabilir ve yerel SQLite veritabanında saklanan verileriyle güvenli, kalıcı oturum açabilir.
+## ✨ Öne Çıkan Özellikler
 
-⌚ Dinamik Koleksiyon Takibi: Kullanıcılar Seiko 4R35, Miyota 9039, Sellita SW200 gibi farklı kalibre ve markalara sahip saatlerini detaylı envanter listesinde takip edebilir.
+*   🔒 **Güvenli Giriş & Kayıt Sistemi:** Kullanıcılar yerel SQLite veritabanında saklanan kimlik bilgileriyle güvenli bir şekilde hesap oluşturabilir, giriş yapabilir ve oturumlarını kalıcı hale getirebilirler.
+*   ⌚ **Dinamik Koleksiyon Takibi:** Seiko 4R35, Miyota 9039, Sellita SW200 veya ETA 2824 gibi farklı kalibrelere, markalara, kasa tiplerine ve satın alım detaylarına sahip saatler ayrıntılı bir şekilde envantere kaydedilebilir.
+*   🤖 **AI Destekli Arıza Teşhis Motoru (Uzman Sistem):** Kullanıcı şikayetlerini ve `ImagePicker` aracılığıyla yüklenen saat fotoğraflarını analiz eden kural tabanlı uzman sistem (Regex & Karar Ağacı tabanlı); mekanik kök neden analizi, tahmini onarım süresi, yapay zeka güven skoru (%) ve kullanıcıya yönelik acil eylem planı üretir.
+*   🛠️ **Tam Kapsamlı Servis Geçmişi:** Saatlere ait oluşturulan arıza ve bakım biletleri (ticket) listelenebilir, anında güncellenebilir (Update) ve silinebilir (Delete).
+*   📊 **Analitik Kontrol Paneli (Dashboard):** Özel tasarlanmış göstergeler sayesinde koleksiyondaki toplam saat sayısı, servis sürecindeki aktif saatler ve yaklaşan bakım zamanları anlık olarak analiz edilir.
+*   🌙 **Premium Amber/Antrasit Tema:** Geleneksel lüks saat markalarının prestijli vizyonundan ilham alınarak tasarlanan, koyu antrasit tonları ve amber (kehribar) detaylarına sahip göz yormayan premium tema yapısı.
 
-🤖 Yapay Zeka Arıza Tespiti: Kullanıcı şikayetlerini ve ImagePicker ile yüklenen saat fotoğraflarını analiz eden Kural Tabanlı Uzman Sistem (Regex tabanlı); kök neden analizi, tahmini onarım süresi ve yapay zeka güven skoru (%) üretir. Tıbbi görüntüleme hassasiyetinden ilham alınarak geliştirilmiş bir analiz altyapısı mevcuttur.
+---
 
-🛠️ Tam Kapsamlı Servis Geçmişi: Saatlere ait oluşturulan arıza biletleri (ticket) listelenebilir, anında düzenlenebilir (Update) ve silinebilir (Delete).
+## 🛠️ Kullanılan Teknolojiler ve Bağımlılıklar
 
-📊 Analitik Dashboard: Özel tasarlanmış istatistik kartları sayesinde koleksiyondaki toplam saat sayısı ve aktif olarak "Bekleyen Servis" durumundaki cihazlar anlık takip edilebilir.
+*   **Flutter & Dart** - Mobil uygulama çatısı ve programlama dili.
+*   **SQLite (sqflite)** - İlişkisel yerel veritabanı yönetimi (Foreign Key & Cascade desteği ile).
+*   **Provider** - Reaktif UI, tema yönetimi ve temiz state yönetimi mimarisi.
+*   **image_picker** - Cihaz kamerası ve yerel galeri ile görsel yükleme entegrasyonu.
+*   **path_provider** - Cihaz dosya sistemi entegrasyonu ve güvenli SQLite yol tanımlaması.
 
-🌙 Premium Aydınlık / Karanlık Tema: Geleneksel lüks saat markalarının vizyonuna uygun, antrasit ve amber renk paletlerine sahip tema mimarisi ile göz yormayan bir deneyim sunulur.
+---
 
-🛠️ Kullanılan Teknolojiler ve Bağımlılıklar
-Flutter & Dart
+## 🚀 Kurulum ve Çalıştırma
 
-SQLite (sqflite): İlişkisel yerel veritabanı (Çapraz tablo ilişkileri ve FOREIGN KEY destekli).
+Projeyi yerel bilgisayarınızda kurmak ve çalıştırmak için aşağıdaki adımları takip edin:
 
-Provider: İş mantığı, tema geçişleri ve arayüz durum yönetimi (State Management).
+### Gereksinimler
+*   Bilgisayarınızda güncel **Flutter SDK** yüklü olmalıdır. ([Kurulum Kılavuzu](https://docs.flutter.dev/get-started/install))
+*   Android Studio / VS Code ve çalışır durumda bir Emülatör ya da fiziksel cihaz.
 
-image_picker: Cihaz kamerası ve yerel galeri entegrasyonu.
+### Adımlar
 
-path_provider: Veritabanı ve yerel dosya yönetimi dizinlemesi.
+1.  **Depoyu Klonlayın:**
+    ```bash
+    git clone https://github.com/basaranmirac/chronocare.git
+    ```
+2.  **Proje Dizinine Geçin:**
+    ```bash
+    cd chronocare
+    ```
+3.  **Gerekli Paketleri İndirin:**
+    ```bash
+    flutter pub get
+    ```
+4.  **Uygulamayı Çalıştırın:**
+    ```bash
+    flutter run
+    ```
 
-🚀 Kurulum ve Çalıştırma
-Projeyi yerel bilgisayarınızda çalıştırmak için aşağıdaki adımları takip edin:
+---
 
-Gereksinimler
-Bilgisayarınızda Flutter SDK yüklü olmalıdır.
+## 🔑 Varsayılan Giriş Bilgileri
 
-Android Studio / VS Code ve çalışır durumda bir emülatör.
+Uygulamayı ilk açtığınızda hızlıca test edebilmek için aşağıdaki önceden tanımlanmış test hesabını kullanabilir veya giriş ekranındaki kayıt ol seçeneğiyle kendi koleksiyoner profilinizi sıfırdan oluşturabilirsiniz:
 
-Adımlar
-Depoyu bilgisayarınıza klonlayın:
+*   **Kullanıcı Adı:** `admin`
+*   **Şifre:** `12345`
 
-Bash
-git clone https://github.com/basaranmirac/chronocare.git
-Proje ana dizinine gidin:
+---
 
-Bash
-cd chronocare
-Gerekli paketleri indirin:
+## 📝 Lisans ve İletişim
 
-Bash
-flutter pub get
-Uygulamayı bir emülatörde veya gerçek cihazda çalıştırın:
-
-Bash
-flutter run
-🔑 Varsayılan Giriş Bilgileri
-Uygulamayı ilk açtığınızda test etmek için aşağıdaki varsayılan hesabı kullanabilir veya giriş ekranından anında kendi koleksiyoner profilinizi oluşturabilirsiniz:
-
-Kullanıcı Adı: admin
-
-Şifre: 12345
+Bu proje, eğitim amaçlı ve yazılım mimarisi en iyi pratiklerini (best practices) göstermek amacıyla geliştirilmiştir. 
+Herhangi bir soru veya geri bildirim için GitHub üzerinden bir Issue açabilir ya da iletişime geçebilirsiniz.
+```
